@@ -20,7 +20,7 @@ public class Controller {
     @RequestMapping("/isbn/{isbn}")
     String home(@PathVariable String isbn){
 
-        return "hello world";
+        return isbn;
     }
 
     public static void main(String arg[]) {
