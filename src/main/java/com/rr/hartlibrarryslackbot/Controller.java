@@ -39,7 +39,7 @@ public class Controller {
     }
 
     private Map<String, String> splitToMap(String str) {
-        String[] tokens = str.split("\n");
+        String[] tokens = str.split("&");
         Map<String, String> map = new HashMap<String, String>();
         for (int i=0; i<tokens.length-1; ++i ) {
             String[] keyValue = tokens[i].split("=");
