@@ -27,6 +27,7 @@ public class Controller {
 
     @RequestMapping("/isbn")
     String checkDbForBook(@RequestBody String msg) {
+        System.out.println(msg);
         Map<String, String> msgMap = splitToMap(msg);
         String returnMsg = msgMap.get("user_name")+" searched for ISBN "+msgMap.get("text")+" .\n";
         returnMsg = returnMsg + " This book is available at Hart Library.";
