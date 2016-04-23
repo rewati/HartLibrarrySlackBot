@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +22,11 @@ public class Controller {
     String home(@PathVariable String isbn){
 
         return isbn;
+    }
+
+    @RequestMapping("/isbn")
+    String checkDbForBook(@RequestBody String msg) {
+        return msg;
     }
 
     public static void main(String arg[]) {
