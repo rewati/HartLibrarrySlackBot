@@ -1,13 +1,17 @@
 package com.rr.hartlibrarryslackbot;
 
+import com.rr.hartlibrarryslackbot.data.BookDb;
+import com.rr.hartlibrarryslackbot.model.Book;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,20 +21,25 @@ import java.util.Map;
 @ComponentScan
 @RestController
 @EnableAutoConfiguration
+@RequestMapping("/books")
 public class Controller {
+    private final String BookFound = "#UserName# searched for ISBN #ISBN# .\n This book is available at Hart Library.";
 
-    @RequestMapping("/isbn/{isbn}")
-    String home(@PathVariable String isbn){
+    @Autowired
+    BookDb bookDb;
 
-        return isbn;
-    }
-
-    @RequestMapping("/isbn")
+    @RequestMapping("")
     String checkDbForBook(@RequestBody String msg) {
         System.out.println(msg);
         Map<String, String> msgMap = splitToMap(msg);
-        String returnMsg = msgMap.get("user_name")+" searched for ISBN "+msgMap.get("text")+" .\n";
-        returnMsg = returnMsg + " This book is available at Hart Library.";
+        return null;
+    }
+
+    String checkDbForBookTest(@RequestBody String msg) {
+        System.out.println(msg);
+        Map<String, String> msgMap = splitToMap(msg);
+        String returnMsg = BookFound.replaceAll("#UserName#",msgMap.get("user_name"));
+
         return returnMsg;
     }
 
@@ -47,4 +56,6 @@ public class Controller {
         }
         return map;
     }
+
+
 }
